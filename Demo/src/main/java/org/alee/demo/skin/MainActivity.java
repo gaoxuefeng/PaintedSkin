@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.alee.component.skin.executor.SkinElement;
+import org.alee.component.skin.pack.IThemeSkinPack;
 import org.alee.component.skin.page.WindowManager;
 import org.alee.component.skin.service.ISwitchThemeSkinObserver;
 import org.alee.component.skin.service.ThemeSkinService;
@@ -77,14 +78,22 @@ public class MainActivity extends AppCompatActivity implements ISwitchThemeSkinO
 
     @Override
     public void onThemeSkinSwitchRunOnUiThread() {
-        mLinearLayout.setBackgroundColor(ThemeSkinService.getInstance().getCurrentThemeSkinPack().getColor(R.color.black));
-        updateFace();
+        IThemeSkinPack skinPack = ThemeSkinService.getInstance().getCurrentThemeSkinPack();
+        if (skinPack != null) {
+            mLinearLayout.setBackgroundColor(ThemeSkinService.getInstance().getCurrentThemeSkinPack().getColor(R.color.black));
+            updateFace();
+        }
+
     }
 
     private void updateFace() {
-        mOutFace.setImageDrawable(ThemeSkinService.getInstance().getCurrentThemeSkinPack().getDrawable(R.drawable.outline_face));
-        mOutFaceName.setImageDrawable(ThemeSkinService.getInstance().getCurrentThemeSkinPack().getDrawable("outline_face"));
-        mOutAr.setImageDrawable(ThemeSkinService.getInstance().getCurrentThemeSkinPack().getMipmap(R.mipmap.outline_view_in_ar));
-        mOutArName.setImageDrawable(ThemeSkinService.getInstance().getCurrentThemeSkinPack().getMipmap("outline_view_in_ar"));
+        IThemeSkinPack skinPack = ThemeSkinService.getInstance().getCurrentThemeSkinPack();
+        if (skinPack != null) {
+            mOutFace.setImageDrawable(skinPack.getDrawable(R.drawable.outline_face));
+            mOutFaceName.setImageDrawable(skinPack.getDrawable("outline_face"));
+            mOutAr.setImageDrawable(skinPack.getMipmap(R.mipmap.outline_view_in_ar));
+            mOutArName.setImageDrawable(skinPack.getMipmap("outline_view_in_ar"));
+
+        }
     }
 }
