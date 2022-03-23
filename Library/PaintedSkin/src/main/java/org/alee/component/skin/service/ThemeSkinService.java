@@ -3,6 +3,7 @@ package org.alee.component.skin.service;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import org.alee.component.skin.factory2.ExpandedFactory2Manager;
 import org.alee.component.skin.pack.IThemeSkinPack;
@@ -76,6 +77,7 @@ public final class ThemeSkinService implements IThemeSkinService {
         mReliableMan.unsubscribeSwitchThemeSkin(observer);
     }
 
+    @Nullable
     @Override
     public IThemeSkinPack getCurrentThemeSkinPack() {
         return mReliableMan.getCurrentThemeSkinPack();

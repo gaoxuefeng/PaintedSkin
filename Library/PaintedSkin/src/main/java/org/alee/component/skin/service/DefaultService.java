@@ -100,6 +100,7 @@ final class DefaultService implements IThemeSkinService, ILoadThemeSkinObserver 
      * @return {@link IThemeSkinPack}
      */
     @Override
+    @Nullable
     public IThemeSkinPack getCurrentThemeSkinPack() {
         return mCurrentThemeSkinPack;
     }

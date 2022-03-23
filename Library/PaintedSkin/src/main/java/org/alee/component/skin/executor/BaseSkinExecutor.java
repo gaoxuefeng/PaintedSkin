@@ -9,6 +9,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
 import org.alee.component.skin.exception.ApplySkinException;
+import org.alee.component.skin.pack.IThemeSkinPack;
 import org.alee.component.skin.pack.ResourcesType;
 import org.alee.component.skin.service.ThemeSkinService;
 
@@ -57,20 +58,32 @@ public abstract class BaseSkinExecutor<T extends View> implements ISkinExecutor 
     }
 
     private void applyThemeSkin(@NonNull T view, @NonNull SkinElement element) {
+        IThemeSkinPack skinPack = ThemeSkinService.getInstance().getCurrentThemeSkinPack();
+        if (skinPack == null) {
+            return;
+        }
         switch (element.getResourcesType()) {
             case ResourcesType.COLOR:
-                ColorStateList colorStateList = ThemeSkinService.getInstance().getCurrentThemeSkinPack().getColorStateList(element.getResourcesId());
+                ColorStateList colorStateList = skinPack.getColorStateList(element.getResourcesId());
                 if (null != colorStateList) {
                     applyColor(view, colorStateList, element.getAttrName());
                     break;
                 }
-                applyColor(view, ThemeSkinService.getInstance().getCurrentThemeSkinPack().getColor(element.getResourcesId()), element.getAttrName());
+                applyColor(view, skinPack.getColor(element.getResourcesId()), element.getAttrName());
                 break;
             case ResourcesType.DRAWABLE:
-                applyDrawable(view, ThemeSkinService.getInstance().getCurrentThemeSkinPack().getDrawable(element.getResourcesId()), element.getAttrName());
+                Drawable drawable = skinPack.getDrawable(element.getResourcesId());
+                if (drawable != null) {
+                    applyDrawable(view, drawable, element.getAttrName());
+
+                }
                 break;
             case ResourcesType.MIPMAP:
-                applyDrawable(view, ThemeSkinService.getInstance().getCurrentThemeSkinPack().getMipmap(element.getResourcesId()), element.getAttrName());
+                Drawable mipmap = skinPack.getMipmap(element.getResourcesId());
+                if (mipmap != null) {
+                    applyDrawable(view, mipmap, element.getAttrName());
+
+                }
                 break;
             default:
                 break;

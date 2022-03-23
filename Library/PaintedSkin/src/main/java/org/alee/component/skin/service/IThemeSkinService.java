@@ -3,6 +3,7 @@ package org.alee.component.skin.service;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import org.alee.component.skin.factory2.ExpandedFactory2Manager;
 import org.alee.component.skin.pack.IThemeSkinPack;
@@ -43,6 +44,7 @@ public interface IThemeSkinService {
      *
      * @return {@link IThemeSkinPack}
      */
+    @Nullable
     IThemeSkinPack getCurrentThemeSkinPack();
 
     /**
